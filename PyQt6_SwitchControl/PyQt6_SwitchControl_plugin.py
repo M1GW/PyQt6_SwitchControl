@@ -25,7 +25,7 @@ SOFTWARE.
 from PyQt6.QtDesigner import QPyDesignerCustomWidgetPlugin
 from PyQt6.QtGui import QIcon, QPixmap
 
-from QSwitchControl import SwitchControl
+from PyQt6_SwitchControl import SwitchControl
 
 
 class SwitchControlPlugin(QPyDesignerCustomWidgetPlugin):
@@ -69,7 +69,7 @@ class SwitchControlPlugin(QPyDesignerCustomWidgetPlugin):
 		)
 
 	def includeFile(self):
-		return "QSwitchControl"
+		return "PyQt6_SwitchControl"
 
 
 _logo_16x16_xpm = []

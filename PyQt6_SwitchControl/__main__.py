@@ -27,7 +27,7 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QHBoxLayout
 
-from QSwitchControl import SwitchControl
+from PyQt6_SwitchControl import SwitchControl
 
 
 class Form(QWidget):
