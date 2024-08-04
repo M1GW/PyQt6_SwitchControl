@@ -1,5 +1,6 @@
-# SwitchControl for PyQt6 (forked from [Prx001/QSwitchControl](https://github.com/Prx001/QSwitchControl))
-## Custom toggle-switch widget implemented in \*PyQt6\* for PyQt6 applications!
+# SwitchControl for PyQt6 <br/> (forked from [Prx001/QSwitchControl](https://github.com/Prx001/QSwitchControl))
+## Custom toggle-switch widget implemented for \*PyQt6\* applications!
+## 
 
 https://user-images.githubusercontent.com/67240789/128912103-b24d7321-a7d6-4b1b-bbdc-562dbd20b358.mp4
 
