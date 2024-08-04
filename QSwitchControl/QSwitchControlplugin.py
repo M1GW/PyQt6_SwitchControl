@@ -21,8 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt6.QtDesigner import QPyDesignerCustomWidgetPlugin
+from PyQt6.QtGui import QIcon, QPixmap
 
 from QSwitchControl import SwitchControl
 
