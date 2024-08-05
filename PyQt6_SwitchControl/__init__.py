@@ -21,5 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 from .PyQt6_SwitchControl import SwitchControl
+from .PyQt6_SwitchControl_plugin import SwitchControlPlugin
 
-__version__ = "1.0.4"
+
+def registerCustomWidgets():
+    return [SwitchControlPlugin()]
+
+
+__version__ = "1.0.4.post1"
