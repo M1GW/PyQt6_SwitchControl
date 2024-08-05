@@ -5,8 +5,8 @@ from setuptools import setup
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 setup(
-	name="PyQt6_QSwitchControl",
-	version="1.0.4",
+	name="PyQt6_SwitchControl",
+	version="1.0.4.post1",
 	description="An easy-to-use and modern toggle switch for Qt Python binding PyQt",
 	long_description=README,
 	long_description_content_type="text/markdown",
@@ -27,6 +27,11 @@ setup(
 	],
 	# py_modules=["__init__", "__main__", "QSwitchControl", "QSwitchControlplugin"],
 	packages=["PyQt6_SwitchControl"],
+	entry_points={
+		'qt_designer_widgets': [
+			'switch_control = designer_plugin:registerCustomWidgets',
+		],
+	},
 	include_package_data=True,
 	install_requires=["PyQt6"]
 )
