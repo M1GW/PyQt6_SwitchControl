@@ -64,7 +64,7 @@ class SwitchControlPlugin(QPyDesignerCustomWidgetPlugin):
 
 	def domXml(self):
 		return (
-			'<widget class="SwitchControl" name=\"switchControl\">\n'
+			'<widget class="SwitchControl" name="switchControl">\n'
 			"</widget>\n"
 		)
 
