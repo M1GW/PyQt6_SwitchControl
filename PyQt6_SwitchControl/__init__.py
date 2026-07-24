@@ -28,4 +28,4 @@ def registerCustomWidgets():
     return [SwitchControlPlugin()]
 
 
-__version__ = "1.0.4.post1"
+__version__ = "1.0.5"

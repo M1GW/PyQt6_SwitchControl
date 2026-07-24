@@ -32,13 +32,15 @@ def take_closest(num, collection):
 
 
 class SwitchCircle(QWidget):
-	def __init__(self, parent, move_range: tuple, color, animation_curve, animation_duration):
+	def __init__(self, parent, move_range: tuple, color, animation_curve, animation_duration, size=22):
 		super().__init__(parent=parent)
 		self.color = color
 		self.move_range = move_range
 		self.animation = QPropertyAnimation(self, b"pos")
 		self.animation.setEasingCurve(animation_curve)
 		self.animation.setDuration(animation_duration)
+		self.size = size
+		self.setFixedSize(size, size)
 
 	def paintEvent(self, event):
 		painter = QPainter()
@@ -46,7 +48,7 @@ class SwitchCircle(QWidget):
 		painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 		painter.setPen(Qt.PenStyle.NoPen)
 		painter.setBrush(QColor(self.color))
-		painter.drawEllipse(0, 0, 22, 22)
+		painter.drawEllipse(0, 0, self.size, self.size)
 		painter.end()
 
 	def set_color(self, value):
@@ -90,26 +92,28 @@ class SwitchCircle(QWidget):
 class SwitchControl(QCheckBox):
 	def __init__(self, parent=None, bg_color="#777777", circle_color="#DDD", active_color="#aa00ff",
 	             animation_curve=QEasingCurve.Type.OutBounce, animation_duration=500, checked: bool = False,
-	             change_cursor=True):
+	             change_cursor=True, circle_size=22):
+		self.circle_size = circle_size
 		if parent is None:
 			super().__init__()
 		else:
 			super().__init__(parent=parent)
-		self.setFixedSize(60, 28)
+		self.setFixedSize(circle_size * 3 - 6, circle_size + 6)
 		if change_cursor:
 			self.setCursor(Qt.CursorShape.PointingHandCursor)
 		self.bg_color = bg_color
 		self.circle_color = circle_color
 		self.animation_curve = animation_curve
 		self.animation_duration = animation_duration
-		self.__circle = SwitchCircle(self, (3, self.width() - 26), self.circle_color, self.animation_curve,
-		                             self.animation_duration)
+		vertical_padding = (self.height() - circle_size) // 2
+		self.__circle = SwitchCircle(self, (3, self.width() - (circle_size + 4)), self.circle_color, self.animation_curve, self.animation_duration, size=circle_size)
+		self.__circle.move(3, vertical_padding)
 		self.__circle_position = 3
 		self.active_color = active_color
 		self.auto = False
 		self.pos_on_press = None
 		if checked:
-			self.__circle.move(self.width() - 26, 3)
+			self.__circle.move(self.width() - (circle_size + 4), 3)
 			self.setChecked(True)
 		elif not checked:
 			self.__circle.move(3, 3)
@@ -163,7 +167,7 @@ class SwitchControl(QCheckBox):
 		self.animation.stop()
 		self.animation.setStartValue(self.__circle.pos())
 		if checked:
-			self.animation.setEndValue(QPoint(self.width() - 26, self.__circle.y()))
+			self.animation.setEndValue(QPoint(self.width() - (self.circle_size + 4), self.__circle.y()))
 			self.setChecked(True)
 		if not checked:
 			self.animation.setEndValue(QPoint(3, self.__circle.y()))
@@ -199,3 +203,17 @@ class SwitchControl(QCheckBox):
 		if self.auto:
 			self.auto = False
 			self.start_animation(not self.isChecked())
+
+	def set_checked_instant(self, checked: bool):
+		self.animation.stop()
+		self.setChecked(checked)
+
+		vertical_padding = (self.height() - self.circle_size) // 2
+		if checked:
+			new_x = self.width() - (self.circle_size + 4)
+		else:
+			new_x = 3
+
+		self.__circle.move(new_x, vertical_padding)
+		self.__circle.update()
+		self.update()
